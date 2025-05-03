@@ -29,3 +29,20 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+@app.route('/crear-admin')
+def crear_admin():
+    if Usuario.query.filter_by(username='admin').first():
+        return 'El usuario admin ya existe.'
+    
+    admin = Usuario(
+        nombre="Admin",
+        username="admin",
+        email="admin@email.com",
+        rol="administrador"
+    )
+    admin.set_password("123456")
+    db.session.add(admin)
+    db.session.commit()
+    return 'Usuario administrador creado. Puedes iniciar sesión en /login'
+
