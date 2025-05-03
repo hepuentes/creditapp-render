@@ -8,10 +8,10 @@ app = Flask(__name__)
 # Clave secreta
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "clave-secreta")
 
-# Configurar correctamente DATABASE_URL
+# Configurar correctamente DATABASE_URL desde entorno
 DB_URL = os.environ.get("DATABASE_URL", "sqlite:///app.db")
 
-# Solución de compatibilidad: Render puede enviar postgres:// en vez de postgresql://
+# Arreglo para compatibilidad antigua postgres:// → postgresql://
 if DB_URL.startswith("postgres://"):
     DB_URL = DB_URL.replace("postgres://", "postgresql://")
 
