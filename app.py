@@ -13,3 +13,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
 from routes import auth
+
+# Crear tablas automáticamente si no existen
+with app.app_context():
+    db.create_all()
